@@ -1,30 +1,41 @@
 package services;
 
+import domain.Income;
+
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class IncomeService {
 
-    private float[] incomes;
-    private int incomeLevel;
+    private ArrayList<Income> incomesList = new ArrayList<>();
 
-    public IncomeService (int size) {
-        incomes = new float[size];
-        incomeLevel = 0;
-    }
-    public boolean insertIncome(float value) {
-      if (incomeLevel < incomes.length) {
-          incomes[incomeLevel] = value;
-          incomeLevel++;
-          return true;
-      }
-      return false;
+    public boolean insertIncome(Income value) {
+      return incomesList.add(value);
     }
 
-    public float[] getAllIncomes(){
-        return incomes;
+    public ArrayList<Income> getAllIncomes(){
+        return incomesList;
     }
 
     public int numberOfIncomes(){
-        return incomeLevel;
+        return incomesList.size();
+    }
+
+    private Float calculateAverage(){
+        return incomesList.isEmpty() ? 0.0f : calculateSum() / incomesList.size();
+    }
+
+    private Float calculateSum(){
+        float sum = 0.0f;
+        for (Income element : incomesList) {
+            sum += element.getValue();
+        }
+        return sum;
+    }
+
+    @Override
+    public String toString() {
+        return "incomesList=" + incomesList +
+                "\naverage of "+calculateAverage();
     }
 }

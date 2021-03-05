@@ -1,28 +1,25 @@
 package services;
 
-public class ExpenseService {
-    private float[] expenses;
-    private int expenseLevel;
+import java.util.ArrayList;
 
-    public ExpenseService(int size){
-        expenses = new float[size];
-        expenseLevel = 0;
-    }
+public class ExpenseService {
+
+    private ArrayList<Float> expensesList = new ArrayList<>();
 
     public boolean insertExpense(float value) {
-        if (expenseLevel < expenses.length) {
-            expenses[expenseLevel] = value;
-            expenseLevel++;
-            return true;
-        }
-        return false;
+        return expensesList.add(value);
     }
 
-    public float[] getAllExpenses(){
-        return expenses;
+    public ArrayList<Float> getAllExpenses(){
+        return expensesList;
     }
 
     public int numberOfExpense(){
-        return expenseLevel;
+        return expensesList.size();
+    }
+
+    @Override
+    public String toString() {
+        return "expensesList=" + expensesList ;
     }
 }
