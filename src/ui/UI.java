@@ -8,7 +8,7 @@ public class UI {
     }
 
     public String newIncomeMenu(){
-        String menu= "Please enter value, (-1 to go to main menu)";
+        String menu= "Please enter name and value, (-1 to go to main menu)";
         return menu;
     }
 

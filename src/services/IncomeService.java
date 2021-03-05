@@ -4,6 +4,7 @@ import domain.Income;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 
 public class IncomeService {
 
@@ -35,7 +36,17 @@ public class IncomeService {
 
     @Override
     public String toString() {
-        return "incomesList=" + incomesList +
-                "\naverage of "+calculateAverage();
+        Comparator<Income> valueComparator = new Comparator<Income>() {
+            @Override
+
+            public int compare(Income o1, Income o2) {
+              return o1.getValue().compareTo(o1.getValue());
+            }
+        };
+
+        incomesList.sort(valueComparator);
+        return "incomesList=" +  incomesList + "\naverage of "+calculateAverage();
     }
+
+
 }

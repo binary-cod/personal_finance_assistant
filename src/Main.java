@@ -1,8 +1,10 @@
+import domain.Income;
 import services.ExpenseService;
 import services.IncomeService;
 import ui.UI;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +14,7 @@ public class Main {
         UI ui = new UI();
         IncomeService incomeService = new IncomeService();
         ExpenseService expenseService = new ExpenseService();
-
+        Date today = new Date();
         do {
             System.out.println(ui.mainMenu());
             int input = scanner.nextInt();
@@ -23,9 +25,14 @@ public class Main {
             switch (input) {
                 case 1:
                     System.out.println(ui.newIncomeMenu());
-                    float income = scanner.nextFloat();
-                    if (income == -1)
+                    String incomeName = scanner.next();
+                    float incomeValue = scanner.nextFloat();
+
+                    if (incomeValue == -1 || incomeName.equals("-1"))
                         break;
+
+                    Income income = new Income(incomeName, incomeValue, System.currentTimeMillis());
+
                     if (incomeService.insertIncome(income))
                         System.out.println("Your income recorded as "+incomeService.numberOfIncomes());
                     else
