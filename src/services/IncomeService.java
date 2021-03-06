@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 import java.util.Comparator;
 
-public class IncomeService {
+public class IncomeService implements Service<Income> {
 
     private ArrayList<Income> incomesList = new ArrayList<>();
 
-    public boolean insertIncome(Income value) {
+    public Boolean insert(Income value) {
       return incomesList.add(value);
     }
 
-    public ArrayList<Income> getAllIncomes(){
+    public ArrayList<Income> getData(){
         return incomesList;
     }
 
@@ -47,11 +47,11 @@ public class IncomeService {
 
     @Override
     public String toString() {
-        Comparator<Income> valueComparator = new Comparator<Income>() {
+        Comparator<Income> valueComparator = new Comparator<Income>(){
             @Override
 
             public int compare(Income o1, Income o2) {
-              return o1.getValue().compareTo(o1.getValue());
+                return o1.getValue().compareTo(o1.getValue());
             }
         };
 

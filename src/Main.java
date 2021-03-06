@@ -1,3 +1,4 @@
+import domain.Expense;
 import domain.Income;
 import services.ExpenseService;
 import services.IncomeService;
@@ -17,7 +18,7 @@ public class Main {
         ExpenseService expenseService = new ExpenseService();
 
         Income temp1 = new Income("Freelancing", 2000, LocalDateTime.of(2021, 1, 21, 12, 20, 30));
-        incomeService.insertIncome(temp1);
+        incomeService.insert(temp1);
 
         do {
             System.out.println(ui.mainMenu());
@@ -37,17 +38,21 @@ public class Main {
 
                     Income income = new Income(incomeName, incomeValue, LocalDateTime.now());
 
-                    if (incomeService.insertIncome(income))
+                    if (incomeService.insert(income))
                         System.out.println("Your income recorded as "+incomeService.numberOfIncomes());
                     else
                         System.out.println("Sorry Incomes are full!");
                     break;
                 case 2:
                     System.out.println(ui.newExpenseMenu());
-                    float expense = scanner.nextFloat();
-                    if (expense == -1)
+                    String expenseName = scanner.next();
+                    Float expenseValue = scanner.nextFloat();
+
+                    if (expenseName.equals("-1") || expenseValue == -1)
                         break;
-                    if (expenseService.insertExpense(expense))
+
+                    Expense expense = new Expense(expenseName, expenseValue, LocalDateTime.now());
+                    if (expenseService.insert(expense))
                         System.out.println("Your expense recorded as "+ expenseService.numberOfExpense());
                     else
                         System.out.println("Sorry, Expenses is full!");

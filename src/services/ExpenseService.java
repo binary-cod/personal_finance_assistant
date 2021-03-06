@@ -1,16 +1,18 @@
 package services;
 
+import domain.Expense;
+
 import java.util.ArrayList;
 
-public class ExpenseService {
+public class ExpenseService implements Service<Expense> {
 
-    private ArrayList<Float> expensesList = new ArrayList<>();
+    private ArrayList<Expense> expensesList = new ArrayList<>();
 
-    public boolean insertExpense(float value) {
+    public Boolean insert(Expense value) {
         return expensesList.add(value);
     }
 
-    public ArrayList<Float> getAllExpenses(){
+    public ArrayList<Expense> getData(){
         return expensesList;
     }
 
