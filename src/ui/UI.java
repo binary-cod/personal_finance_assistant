@@ -3,7 +3,7 @@ package ui;
 public class UI {
 
     public String mainMenu(){
-        String menu = "1.Create Income\n2.Create Expense\n3.List Income\n4.List Expense\n-1.Exit";
+        String menu = "1.Create Income\n2.Create Expense\n3.List Income\n4.List Expense\n5.Print Balance\n-1.Exit";
         return menu;
     }
 

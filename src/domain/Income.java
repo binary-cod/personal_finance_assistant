@@ -1,16 +1,14 @@
 package domain;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Income {
     private String name;
     private float value;
-    private long incomeDate;
+    private LocalDateTime incomeDate;
 
-    private SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd:HH.mm.ss");
-
-    public Income(String name, float value, long incomeDate) {
+    public Income(String name, float value, LocalDateTime incomeDate) {
         this.name = name;
         this.value = value;
         this.incomeDate = incomeDate;
@@ -32,11 +30,11 @@ public class Income {
         this.value = value;
     }
 
-    public long getIncomeDate() {
+    public LocalDateTime getIncomeDate() {
         return incomeDate;
     }
 
-    public void setIncomeDate(long incomeDate) {
+    public void setIncomeDate(LocalDateTime incomeDate) {
         this.incomeDate = incomeDate;
     }
 
@@ -46,7 +44,7 @@ public class Income {
         return "Income{" +
                 "name='" + name + '\'' +
                 ", value=" + value +
-                ", incomeDate=" + dtf.format(new Timestamp(incomeDate)) +
+                ", incomeDate=" + incomeDate.format(DateTimeFormatter.ofPattern("YYYY-MM-DD:hh:mm:ss")) +
                 '}';
     }
 }
