@@ -8,4 +8,6 @@ Java Command Line Personal Finance assistant
 
 ## Incomes
 # Persistence
+### In memory
+### In File
 
