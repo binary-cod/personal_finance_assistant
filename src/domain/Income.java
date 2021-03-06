@@ -44,7 +44,7 @@ public class Income {
         return "Income{" +
                 "name='" + name + '\'' +
                 ", value=" + value +
-                ", incomeDate=" + incomeDate.format(DateTimeFormatter.ofPattern("YYYY-MM-DD:hh:mm:ss")) +
+                ", incomeDate=" + incomeDate.format(DateTimeFormatter.ofPattern("YYYY-MM-dd, HH:mm:ss")) +
                 '}';
     }
 }
