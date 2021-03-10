@@ -66,9 +66,14 @@ public class Main {
                     System.out.println(expenseService);
                     break;
                 case 5:
+                    Float incomeSum = incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now()));
+                    Float expenseSum = expenseService.calculateSum(expenseService.getExpensesOfGivenDate(LocalDateTime.now()));
                     System.out.println(incomeService.getIncomesOfGivenDate(LocalDateTime.now()));
-                    System.out.println("sum of your incomes for month: "+LocalDateTime.now().getMonth()+" - "
-                            + incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now())));
+                    System.out.println("sum of your incomes for month: "+LocalDateTime.now().getMonth()+" : "
+                            + incomeSum);
+                    System.out.println("sum of expenses for month: "+LocalDateTime.now().getMonth()+ " : "
+                            + expenseSum);
+                    System.out.println("Your balance is : "+ (incomeSum - expenseSum));
                 default:
                     System.out.println("please use numbers between 1 and 4");
                     break;
