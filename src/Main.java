@@ -18,7 +18,10 @@ public class Main {
         ExpenseService expenseService = new ExpenseService();
 
         Income temp1 = new Income("Freelancing", 2000, LocalDateTime.of(2021, 1, 21, 12, 20, 30));
+        Expense tempExpense = new Expense("taxi bill", 100.0f, LocalDateTime.of(2021, 1, 21, 12, 20, 30));
+
         incomeService.insert(temp1);
+        expenseService.insert(tempExpense);
 
         do {
             System.out.println(ui.mainMenu());
@@ -69,6 +72,7 @@ public class Main {
                     Float incomeSum = incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now()));
                     Float expenseSum = expenseService.calculateSum(expenseService.getExpensesOfGivenDate(LocalDateTime.now()));
                     System.out.println(incomeService.getIncomesOfGivenDate(LocalDateTime.now()));
+                    System.out.println(expenseService.filterListByDate(LocalDateTime.now()));
                     System.out.println("sum of your incomes for month: "+LocalDateTime.now().getMonth()+" : "
                             + incomeSum);
                     System.out.println("sum of expenses for month: "+LocalDateTime.now().getMonth()+ " : "

@@ -36,4 +36,13 @@ public class Expense {
     public void setExpenseDate(LocalDateTime expenseDate) {
         this.expenseDate = expenseDate;
     }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "expenseName='" + expenseName + '\'' +
+                ", expenseValue=" + expenseValue +
+                ", expenseDate=" + expenseDate +
+                '}';
+    }
 }

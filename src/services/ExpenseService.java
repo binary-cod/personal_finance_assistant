@@ -4,6 +4,11 @@ import domain.Expense;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class ExpenseService implements Service<Expense> {
 
@@ -27,6 +32,15 @@ public class ExpenseService implements Service<Expense> {
             result += expense.getExpenseValue();
 
         return result;
+    }
+    
+    public List<Expense> filterListByDate(LocalDateTime givenDate){
+        List<Expense> filteredList = expensesList
+                .stream()  // create stream
+                .filter(expense -> expense.getExpenseDate().getMonth() == givenDate.getMonth()) // apply filter
+                .sorted() // sorting
+                .collect(Collectors.toList());  // terminal operation
+        return filteredList;
     }
 
     public ArrayList<Expense> getExpensesOfGivenDate(LocalDateTime givenDate){
