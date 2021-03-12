@@ -33,7 +33,14 @@ public class ExpenseService implements Service<Expense> {
 
         return result;
     }
-    
+
+    public Double calculateSumByStreams(ArrayList<Expense> list){
+        return list
+                .stream()  //create stream
+                .mapToDouble(e -> e.getExpenseValue().doubleValue()) // apply operations
+                .sum(); // terminal operation, to terminate stream
+    }
+
     public List<Expense> filterListByDate(LocalDateTime givenDate){
         List<Expense> filteredList = expensesList
                 .stream()  // create stream
@@ -42,6 +49,7 @@ public class ExpenseService implements Service<Expense> {
                 .collect(Collectors.toList());  // terminal operation
         return filteredList;
     }
+
 
     public ArrayList<Expense> getExpensesOfGivenDate(LocalDateTime givenDate){
         ArrayList<Expense> resultList = new ArrayList<>();
