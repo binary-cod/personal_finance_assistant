@@ -8,4 +8,5 @@ Java Command Line Personal Finance assistant
 
 ## Incomes
 # Persistence
-
+## In memory
+Data is stored inside the Lists
