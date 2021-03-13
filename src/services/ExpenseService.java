@@ -1,10 +1,14 @@
 package services;
 
 import domain.Expense;
+import domain.Income;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,42 +22,45 @@ public class ExpenseService implements Service<Expense> {
         return expensesList.add(value);
     }
 
-    public ArrayList<Expense> getData(){
+    public ArrayList<Expense> getData() {
         return expensesList;
     }
 
-    public int numberOfExpense(){
+    public int numberOfExpense() {
         return expensesList.size();
     }
 
-    public Float calculateSum(ArrayList<Expense> list){
+    public Float calculateSum(ArrayList<Expense> list) {
         Float result = 0.0f;
-        for (Expense expense: list)
+        for (Expense expense : list)
             result += expense.getExpenseValue();
 
         return result;
     }
 
-    public Double calculateSumByStreams(ArrayList<Expense> list){
+    public Double calculateSumByStreams(ArrayList<Expense> list) {
         return list
                 .stream()  //create stream
+                //.map(expense -> expense.getExpenseName().toUpperCase(Locale.ROOT))
                 .mapToDouble(e -> e.getExpenseValue().doubleValue()) // apply operations
                 .sum(); // terminal operation, to terminate stream
     }
 
-    public List<Expense> filterListByDate(LocalDateTime givenDate){
+    public List<Expense> filterListByDate(LocalDateTime givenDate) {
+        Predicate<Expense> expensePredicate = expense ->
+                expense.getExpenseDate().getMonth() == givenDate.getMonth();
+
         List<Expense> filteredList = expensesList
                 .stream()  // create stream
-                .filter(expense -> expense.getExpenseDate().getMonth() == givenDate.getMonth()) // apply filter
-                .sorted() // sorting
+                .filter(expensePredicate) // apply filter
+                .sorted((o1, o2) -> o1.getExpenseDate().compareTo(o2.getExpenseDate())) // sorting
                 .collect(Collectors.toList());  // terminal operation
         return filteredList;
     }
 
-
-    public ArrayList<Expense> getExpensesOfGivenDate(LocalDateTime givenDate){
+    public ArrayList<Expense> getExpensesOfGivenDate(LocalDateTime givenDate) {
         ArrayList<Expense> resultList = new ArrayList<>();
-        for (int i = 0; i < expensesList.size(); i++){
+        for (int i = 0; i < expensesList.size(); i++) {
             if (expensesList.get(i).getExpenseDate().getMonth().equals(givenDate.getMonth()))
                 resultList.add(expensesList.get(i));
         }
@@ -62,6 +69,6 @@ public class ExpenseService implements Service<Expense> {
 
     @Override
     public String toString() {
-        return "expensesList=" + expensesList ;
+        return "expensesList=" + expensesList;
     }
 }

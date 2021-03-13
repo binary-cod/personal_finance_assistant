@@ -6,28 +6,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class IncomeService implements Service<Income> {
+public class IncomeService {
 
-    private ArrayList<Income> incomesList = new ArrayList<>();
+    private List<Income> incomesList = new ArrayList<>();
 
     public Boolean insert(Income value) {
-      return incomesList.add(value);
+        return incomesList.add(value);
     }
 
-    public ArrayList<Income> getData(){
+    public List<Income> getData() {
         return incomesList;
     }
 
-    public int numberOfIncomes(){
+    public int numberOfIncomes() {
         return incomesList.size();
     }
 
-    private Float calculateAverage(){
+    private Float calculateAverage() {
         return incomesList.isEmpty() ? 0.0f : calculateSum(incomesList) / incomesList.size();
     }
 
-    public Float calculateSum(ArrayList<Income> list){
+    public Float calculateSum(List<Income> list) {
         float sum = 0.0f;
         for (Income element : list) {
             sum += element.getValue();
@@ -35,19 +37,31 @@ public class IncomeService implements Service<Income> {
         return sum;
     }
 
-    public ArrayList<Income> getIncomesOfGivenDate(LocalDateTime someDate){
+    public ArrayList<Income> getIncomesOfGivenDate(LocalDateTime someDate) {
         ArrayList<Income> filteredList = new ArrayList<>();
-        for (Income income: incomesList) {
-            if (income.getIncomeDate().getMonth().equals(someDate.getMonth())){
+        for (Income income : incomesList) {
+            if (income.getIncomeDate().getMonth().equals(someDate.getMonth())) {
                 filteredList.add(income);
             }
         }
         return filteredList;
     }
 
+    public void deleteIncomeGivenDaysOld(Long days) {
+        List<Income> tempIncomesList = incomesList
+                .stream()
+                .peek(income -> {
+                    System.out.println(income.getIncomeDate().minusDays(days));
+                })
+                .filter(income -> income.getIncomeDate().isBefore(LocalDateTime.now().minusDays(days)))
+                .collect(Collectors.toList());
+
+        setIncomesList(tempIncomesList);
+    }
+
     @Override
     public String toString() {
-        Comparator<Income> valueComparator = new Comparator<Income>(){
+        Comparator<Income> valueComparator = new Comparator<Income>() {
             @Override
 
             public int compare(Income o1, Income o2) {
@@ -56,8 +70,11 @@ public class IncomeService implements Service<Income> {
         };
 
         incomesList.sort(valueComparator);
-        return "incomesList=" +  incomesList + "\naverage of "+calculateAverage();
+        return "incomesList=" + incomesList + "\naverage of " + calculateAverage();
     }
 
 
+    public void setIncomesList(List<Income> incomesList) {
+        this.incomesList = incomesList;
+    }
 }
