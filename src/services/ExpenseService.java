@@ -2,6 +2,7 @@ package services;
 
 import domain.Expense;
 import domain.Income;
+import repo.FileRepo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class ExpenseService implements Service<Expense> {
+
+    private FileRepo fileRepo = new FileRepo();
 
     private ArrayList<Expense> expensesList = new ArrayList<>();
 
@@ -65,6 +68,10 @@ public class ExpenseService implements Service<Expense> {
                 resultList.add(expensesList.get(i));
         }
         return resultList;
+    }
+
+    public void printData(){
+        fileRepo.printDataFromFile();
     }
 
     @Override
