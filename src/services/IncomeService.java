@@ -1,6 +1,7 @@
 package services;
 
 import domain.Income;
+import repo.FileRepo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class IncomeService {
 
-    private List<Income> incomesList = new ArrayList<>();
+    private List<Income> incomesList;
 
     public Boolean insert(Income value) {
         return incomesList.add(value);
@@ -23,6 +24,11 @@ public class IncomeService {
 
     public int numberOfIncomes() {
         return incomesList.size();
+    }
+
+    public IncomeService() {
+        FileRepo fileRepo = new FileRepo();
+        incomesList = fileRepo.getIncomeList();
     }
 
     private Float calculateAverage() {

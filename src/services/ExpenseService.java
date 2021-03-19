@@ -1,31 +1,28 @@
 package services;
 
 import domain.Expense;
-import domain.Income;
 import repo.FileRepo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public class ExpenseService implements Service<Expense> {
 
-    private FileRepo fileRepo = new FileRepo();
-
-    private ArrayList<Expense> expensesList = new ArrayList<>();
+    private List<Expense> expensesList;
 
     public Boolean insert(Expense value) {
         return expensesList.add(value);
     }
 
-    public ArrayList<Expense> getData() {
+    public ExpenseService(){
+        FileRepo fileRepo = new FileRepo();
+        expensesList = fileRepo.getExpenseList();
+    }
+
+    public List<Expense> getData() {
         return expensesList;
     }
 
@@ -68,10 +65,6 @@ public class ExpenseService implements Service<Expense> {
                 resultList.add(expensesList.get(i));
         }
         return resultList;
-    }
-
-    public void printData(){
-        fileRepo.printDataFromFile();
     }
 
     @Override

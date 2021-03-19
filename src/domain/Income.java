@@ -8,6 +8,8 @@ public class Income {
     private float value;
     private LocalDateTime incomeDate;
 
+    public Income(){}
+
     public Income(String name, float value, LocalDateTime incomeDate) {
         this.name = name;
         this.value = value;

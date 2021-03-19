@@ -13,6 +13,10 @@ public class Expense {
         this.expenseDate = expenseDate;
     }
 
+    public Expense() {
+
+    }
+
     public String getExpenseName() {
         return expenseName;
     }
