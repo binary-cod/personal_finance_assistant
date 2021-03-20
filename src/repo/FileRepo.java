@@ -4,10 +4,12 @@ import domain.Expense;
 import domain.Income;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,9 +57,10 @@ public class FileRepo {
 
         String[] tokens = line.split(";");
         Income income = new Income();
-        income.setName(tokens[1]);
-        income.setValue(Float.parseFloat(tokens[2]));
-        income.setIncomeDate(LocalDateTime.parse(tokens[3]));
+        income.setID(tokens[1]);
+        income.setName(tokens[2]);
+        income.setValue(Float.parseFloat(tokens[3]));
+        income.setIncomeDate(LocalDateTime.parse(tokens[4]));
 
         return income;
     }
@@ -72,13 +75,45 @@ public class FileRepo {
 
         String[] tokens = line.split(";");
         Expense expense = new Expense();
-        expense.setExpenseName(tokens[1]);
-        expense.setExpenseValue(Float.parseFloat(tokens[2]));
-        expense.setExpenseDate(LocalDateTime.parse(tokens[3]));
+        expense.setID(tokens[1]);
+        expense.setExpenseName(tokens[2]);
+        expense.setExpenseValue(Float.parseFloat(tokens[3]));
+        expense.setExpenseDate(LocalDateTime.parse(tokens[4]));
 
         return expense;
     }
 
+    public void writeEverythingToFile(){
+        // 1. get list of incomes and expenses
+        // 2. go through each of the objects in lists and get String representation of it
+        // 3. build single content out of lines
+        // 4. truncate the file and write the content to the file
+
+        StringBuilder content = new StringBuilder();
+        for (Expense e : expenseList) {
+            content.append(e +"\n");
+        }
+
+        for (Income i: incomeList) {
+            content.append(i+"\n");
+        }
+
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(fileName))) {
+            bw.write(content.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeData(String data){
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(fileName),
+                StandardOpenOption.APPEND)) {
+            bw.write(data);
+        } catch (IOException ex) {
+
+        }
+
+    }
     public List<Income> getIncomeList() {
         return incomeList;
     }
