@@ -1,13 +1,17 @@
 package domain;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Expense {
+
+    private String ID;
     private String expenseName;
     private Float expenseValue;
     private LocalDateTime expenseDate;
 
     public Expense(String expenseName, Float expenseValue, LocalDateTime expenseDate) {
+        this.ID = UUID.randomUUID().toString();
         this.expenseName = expenseName;
         this.expenseValue = expenseValue;
         this.expenseDate = expenseDate;
@@ -41,13 +45,21 @@ public class Expense {
         this.expenseDate = expenseDate;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     @Override
     public String toString() {
-        return "Expense{" +
-                "expenseName='" + expenseName + '\'' +
-                ", expenseValue=" + expenseValue +
-                ", expenseDate=" + expenseDate +
-                '}';
+        return "E;"
+                +getID()+";"
+                +getExpenseName()+";"
+                +getExpenseValue()+";"
+                +getExpenseDate();
     }
 
 }

@@ -2,8 +2,11 @@ package domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class Income {
+
+    private String ID;
     private String name;
     private float value;
     private LocalDateTime incomeDate;
@@ -11,6 +14,7 @@ public class Income {
     public Income(){}
 
     public Income(String name, float value, LocalDateTime incomeDate) {
+        this.ID = UUID.randomUUID().toString();
         this.name = name;
         this.value = value;
         this.incomeDate = incomeDate;
@@ -40,13 +44,21 @@ public class Income {
         this.incomeDate = incomeDate;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     @Override
     public String toString() {
 
-        return "Income{" +
-                "name='" + name + '\'' +
-                ", value=" + value +
-                ", incomeDate=" + incomeDate.format(DateTimeFormatter.ofPattern("YYYY-MM-dd, HH:mm:ss")) +
-                '}';
+        return "I;"
+                + ID + ';'
+                + name + ';'
+                + value + ';'
+                + incomeDate;
     }
 }
