@@ -12,14 +12,17 @@ import java.util.stream.Collectors;
 public class ExpenseService implements Service<Expense> {
 
     private List<Expense> expensesList;
-
-    public Boolean insert(Expense value) {
-        return expensesList.add(value);
-    }
+    private FileRepo fileRepo;
 
     public ExpenseService(){
-        FileRepo fileRepo = new FileRepo();
+        fileRepo = new FileRepo();
         expensesList = fileRepo.getExpenseList();
+    }
+
+    public Boolean insert(Expense value) {
+        expensesList.add(value);
+        fileRepo.writeData(value.toString() +"\n");
+        return true;
     }
 
     public List<Expense> getData() {

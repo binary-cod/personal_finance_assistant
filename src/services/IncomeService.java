@@ -13,9 +13,17 @@ import java.util.stream.Collectors;
 public class IncomeService {
 
     private List<Income> incomesList;
+    private FileRepo fileRepo;
+
+    public IncomeService() {
+        fileRepo = new FileRepo();
+        incomesList = fileRepo.getIncomeList();
+    }
 
     public Boolean insert(Income value) {
-        return incomesList.add(value);
+        incomesList.add(value);
+        fileRepo.writeData(value.toString()+"\n");
+        return true;
     }
 
     public List<Income> getData() {
@@ -24,11 +32,6 @@ public class IncomeService {
 
     public int numberOfIncomes() {
         return incomesList.size();
-    }
-
-    public IncomeService() {
-        FileRepo fileRepo = new FileRepo();
-        incomesList = fileRepo.getIncomeList();
     }
 
     private Float calculateAverage() {

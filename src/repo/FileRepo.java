@@ -110,7 +110,7 @@ public class FileRepo {
                 StandardOpenOption.APPEND)) {
             bw.write(data);
         } catch (IOException ex) {
-
+            ex.printStackTrace();
         }
 
     }
