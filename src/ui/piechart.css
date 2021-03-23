@@ -1,0 +1,16 @@
+/*.chart
+{
+    -fx-clockwise: false;
+    -fx-pie-label-visible: true;
+    -fx-label-line-length: 10;
+    -fx-start-angle: 90;
+}
+ 
+.chart-pie 
+{
+    -fx-border-color: white;
+    -fx-background-insets: 2;
+}
+
+
+

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="585.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.Gui_Controller">
+  <children>
+      <TabPane prefHeight="544.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab fx:id="balance" onSelectionChanged="#balance_onSelect" text="Balance">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="640.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="30.0" prefHeight="18.0" prefWidth="193.0" text="Balance for last month." />
+                        <Separator layoutX="710.0" layoutY="0.0" orientation="VERTICAL" prefHeight="518.0" prefWidth="10.0" />
+                        <Label layoutX="730.0" layoutY="30.0" prefHeight="18.0" prefWidth="193.0" text="Balance:" />
+                        <Label layoutX="730.0" layoutY="70.0" text="Total of Incomes:" />
+                        <Label fx:id="total_income" layoutX="840.0" layoutY="70.0" text="0" />
+                        <Label layoutX="730.0" layoutY="120.0" text="Total of Expenses:" />
+                        <Label fx:id="total_Expences" layoutX="840.0" layoutY="120.0" text="0" />
+                        <Label fx:id="net_Profit" layoutX="840.0" layoutY="170.0" text="0" />
+                        <Label layoutX="730.0" layoutY="170.0" text="Net Profit:" />
+                        <PieChart fx:id="pieChart" depthTest="DISABLE" disable="true" layoutX="14.0" layoutY="60.0" prefHeight="439.0" prefWidth="685.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab fx:id="ListOfIncome" onSelectionChanged="#listOfIncome_onSelect" text="List of Incomes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="640.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="32.0" prefHeight="18.0" prefWidth="193.0" text="Incomes" />
+                        <Label layoutX="730.0" layoutY="32.0" prefHeight="18.0" prefWidth="193.0" text="Enter type and amount of Income" />
+                        <TextField fx:id="income_Type" layoutX="730.0" layoutY="89.0" onMouseClicked="#incometypefieldOnMouse" text="Enter type" />
+                        <Label layoutX="730.0" layoutY="71.0" text="Type" />
+                        <Label layoutX="730.0" layoutY="134.0" text="Amount" />
+                        <TextField fx:id="income_Amount" layoutX="730.0" layoutY="152.0" onMouseClicked="#incomeamountfieldOnMouse" text="Enter amount" />
+                        <Button fx:id="add_Income" layoutX="730.0" layoutY="201.0" mnemonicParsing="false" onAction="#add_income_Pushed" text="Add Income" />
+                        <Separator layoutX="710.0" orientation="VERTICAL" prefHeight="517.0" prefWidth="14.0" />
+                        <TableView fx:id="incomeListTableView" layoutX="14.0" layoutY="65.0" prefHeight="438.0" prefWidth="687.0">
+                        </TableView>
+                        <Label fx:id="addIncomeStatus" alignment="TOP_LEFT" layoutX="730.0" layoutY="250.0" prefHeight="194.0" prefWidth="202.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="listOfExpences" onSelectionChanged="#listOfExpences_onSelect" text="List of Expenses">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="640.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="32.0" prefHeight="18.0" prefWidth="193.0" text="Expenses" />
+                        <Label layoutX="730.0" layoutY="32.0" prefHeight="18.0" prefWidth="193.0" text="Enter type and amount of Expense" />
+                        <TextField fx:id="expense_Type" layoutX="730.0" layoutY="89.0" onMouseClicked="#expensetypefieldOnMouse" text="Enter type" />
+                        <Label layoutX="730.0" layoutY="71.0" text="Type" />
+                        <Label layoutX="730.0" layoutY="134.0" text="Amount" />
+                        <TextField fx:id="expense_Amount" layoutX="730.0" layoutY="152.0" onMouseClicked="#expeneamountfieldOnMouse" text="Enter amount" />
+                        <Button fx:id="add_expense" layoutX="730.0" layoutY="201.0" mnemonicParsing="false" onAction="#add_expense_Pushed" text="Add Expense" />
+                        <Separator layoutX="710.0" orientation="VERTICAL" prefHeight="517.0" prefWidth="14.0" />
+                         <TableView fx:id="expenseListTableView" layoutX="14.0" layoutY="65.0" prefHeight="438.0" prefWidth="687.0">
+                         </TableView>
+                         <Label fx:id="addExpenseStatus" alignment="TOP_LEFT" layoutX="730.0" layoutY="250.0" prefHeight="194.0" prefWidth="202.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <AnchorPane prefHeight="40.0" prefWidth="640.0">
+         <children>
+            <Separator prefHeight="6.0" prefWidth="950.0" />
+            <Label contentDisplay="BOTTOM" layoutX="14.0" layoutY="11.0" text="All rights reserved. : )" />
+         </children>
+      </AnchorPane>
+  </children>
+</VBox>

@@ -23,7 +23,7 @@ public class FileRepo {
     List<Expense> expenseList = new ArrayList<>();
 
     public FileRepo(){
-        this.fileName = "/home/wild/projects/binarycod/fin_app_cl/per_fin_assistant.txt";
+        this.fileName = "C:\\Users\\nurbe\\Documents\\GitHub\\personal_finance_assistant\\per_fin_assistant.txt";
         readAndparseData();
     }
 

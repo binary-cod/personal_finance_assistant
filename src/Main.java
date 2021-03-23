@@ -1,23 +1,28 @@
 import domain.Expense;
 import domain.Income;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import services.ExpenseService;
 import services.IncomeService;
 import ui.UI;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.Scanner;
 
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) {
-
+        launch(args);
+/*
         Scanner scanner = new Scanner(System.in);
         UI ui = new UI();
         IncomeService incomeService = new IncomeService();
         ExpenseService expenseService = new ExpenseService();
 
-       /* Income temp1 = new Income("Salary", 2000, LocalDateTime.of(2021, 3, 7, 12, 20, 30));
+        Income temp1 = new Income("Salary", 2000, LocalDateTime.of(2021, 3, 7, 12, 20, 30));
         Income temp2 = new Income("Freelancing", 1000, LocalDateTime.of(2021, 3, 10, 12, 20, 30));
         Income temp3 = new Income("Trading", 500, LocalDateTime.of(2021, 1, 21, 12, 20, 30));
         Expense tempExpense = new Expense("taxi bill", 100.0f, LocalDateTime.of(2021, 1, 21, 12, 20, 30));
@@ -26,7 +31,7 @@ public class Main {
         incomeService.insert(temp2);
         incomeService.insert(temp3);
         expenseService.insert(tempExpense);
-*/
+
         do {
             System.out.println(ui.mainMenu());
             int input = scanner.nextInt();
@@ -91,5 +96,20 @@ public class Main {
                     break;
             }
         } while (true);
+*/
+
+    }
+
+    @Override
+    public void start(Stage stage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("ui/personal_finance_assistant_GUI.fxml"));
+            root.getStylesheets().add(getClass().getResource("ui/piechart.css").toExternalForm());
+            stage.setScene(new Scene(root));
+            stage.setTitle("Personal Finance Assistant");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
