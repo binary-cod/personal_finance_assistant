@@ -1,4 +1,4 @@
-package netclient;
+package networking;
 
 import java.io.BufferedReader;
 import java.io.IOException;
