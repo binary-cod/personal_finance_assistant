@@ -73,6 +73,14 @@ public class PFAServer {
                             writeToWriterAndFlush("Your expense recorded as "+expenseService.numberOfExpense(), out);
 
                         break;
+                    case 3:
+                        writeToWriterAndFlush("List income is selected", out);
+                        writeToWriterAndFlush(incomeService.toString(), out);
+                        break;
+                    case 4:
+                        writeToWriterAndFlush("List expense is selected", out);
+                        writeToWriterAndFlush(expenseService.toString(), out);
+                        break;
                     case 5:
                         Float incomeSum = incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now()));
                         Float expenseSum = expenseService.calculateSum(expenseService.getExpensesOfGivenDate(LocalDateTime.now()));
