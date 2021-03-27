@@ -88,15 +88,14 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("List expense is selected");
-                    System.out.println(expenseService);
+                    System.out.println(expenseService.getData(user));
                     break;
                 case 5:
-                    Float incomeSum = incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now()));
-                    Float expenseSum = expenseService.calculateSum(expenseService.getExpensesOfGivenDate(LocalDateTime.now()));
-                    System.out.println(incomeService.getIncomesOfGivenDate(LocalDateTime.now()));
+                    Float incomeSum = incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now(), user));
+                    Float expenseSum = expenseService.calculateSum(expenseService.getExpensesOfGivenDate(LocalDateTime.now(), user));
+                    System.out.println(incomeService.getIncomesOfGivenDate(LocalDateTime.now(), user));
                     System.out.println(expenseService.filterListByDate(LocalDateTime.now()));
                     incomeService.deleteIncomeGivenDaysOld(5l);
-                    System.out.println("stream example "+incomeService.getData(user));
 
                     System.out.println("sum of your incomes for month: "+LocalDateTime.now().getMonth()+" : "
                             + incomeSum);

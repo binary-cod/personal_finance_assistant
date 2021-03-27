@@ -1,6 +1,7 @@
 package services;
 
 import domain.Expense;
+import domain.User;
 import repo.FileRepo;
 
 import java.time.LocalDateTime;
@@ -25,8 +26,11 @@ public class ExpenseService implements Service<Expense> {
         return true;
     }
 
-    public List<Expense> getData() {
-        return expensesList;
+    public List<Expense> getData(User user) {
+        return expensesList
+                .stream()
+                .filter(expense -> expense.getOwner().getEmail().equals(user.getEmail()))
+                .collect(Collectors.toList());
     }
 
     public int numberOfExpense() {
@@ -61,10 +65,11 @@ public class ExpenseService implements Service<Expense> {
         return filteredList;
     }
 
-    public ArrayList<Expense> getExpensesOfGivenDate(LocalDateTime givenDate) {
+    public ArrayList<Expense> getExpensesOfGivenDate(LocalDateTime givenDate, User user) {
         ArrayList<Expense> resultList = new ArrayList<>();
         for (int i = 0; i < expensesList.size(); i++) {
-            if (expensesList.get(i).getExpenseDate().getMonth().equals(givenDate.getMonth()))
+            if (expensesList.get(i).getExpenseDate().getMonth().equals(givenDate.getMonth())
+            && expensesList.get(i).getOwner().getEmail().equals(user.getEmail()))
                 resultList.add(expensesList.get(i));
         }
         return resultList;

@@ -50,10 +50,11 @@ public class IncomeService {
         return sum;
     }
 
-    public ArrayList<Income> getIncomesOfGivenDate(LocalDateTime someDate) {
+    public ArrayList<Income> getIncomesOfGivenDate(LocalDateTime someDate, User user) {
         ArrayList<Income> filteredList = new ArrayList<>();
         for (Income income : incomesList) {
-            if (income.getIncomeDate().getMonth().equals(someDate.getMonth())) {
+            if (income.getIncomeDate().getMonth().equals(someDate.getMonth())
+            && income.getOwner().getEmail().equals(user.getEmail())) {
                 filteredList.add(income);
             }
         }
