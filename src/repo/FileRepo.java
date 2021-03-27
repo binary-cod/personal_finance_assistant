@@ -2,6 +2,8 @@ package repo;
 
 import domain.Expense;
 import domain.Income;
+import domain.User;
+import services.UserService;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class FileRepo {
@@ -21,10 +24,13 @@ public class FileRepo {
     String fileName;
     List<Income> incomeList = new ArrayList<>();
     List<Expense> expenseList = new ArrayList<>();
+    UserService userService;
 
     public FileRepo(){
         this.fileName = "/home/wild/projects/binarycod/fin_app_cl/per_fin_assistant.txt";
+        userService = new UserService();
         readAndparseData();
+
     }
 
     public void readAndparseData(){
@@ -51,7 +57,8 @@ public class FileRepo {
         // I ; salary ; 2000 ; 2021-03-15:14:56:00
         // Step 1 : Tokenize, split
         // Step 2 : Go through each token and create Income object
-        // Step 3 : return Income
+        // Step 3 : get email and get User object according to email, set to Income
+        // Step 4 : return Income
 
         // ["I", "salary", "2000", "2021-03-15:14:56:00"] -->
 
@@ -62,6 +69,9 @@ public class FileRepo {
         income.setValue(Float.parseFloat(tokens[3]));
         income.setIncomeDate(LocalDateTime.parse(tokens[4]));
 
+        User user = userService.getUserByEmail(tokens[5]).get();
+        income.setOwner(user);
+
         return income;
     }
 
@@ -69,7 +79,8 @@ public class FileRepo {
         // I ; salary ; 2000 ; 2021-03-15:14:56:00
         // Step 1 : Tokenize, split
         // Step 2 : Go through each token and create Income object
-        // Step 3 : return Income
+        // Step 3 : get email and get User object according to email, set to Expense
+        // Step 4 : return Income
 
         // ["I", "salary", "2000", "2021-03-15:14:56:00"] -->
 
@@ -79,6 +90,9 @@ public class FileRepo {
         expense.setExpenseName(tokens[2]);
         expense.setExpenseValue(Float.parseFloat(tokens[3]));
         expense.setExpenseDate(LocalDateTime.parse(tokens[4]));
+
+        User user = userService.getUserByEmail(tokens[5]).get();
+        expense.setOwner(user);
 
         return expense;
     }
