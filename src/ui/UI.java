@@ -16,4 +16,16 @@ public class UI {
         String menu= "Please enter name and value, (-1 to go to main menu)";
         return menu;
     }
+
+    public String loginMenu(){
+        return "enter your email and password to login!";
+    }
+
+    public String welcomeMessage () {
+        return "Welcome. Enjoy your stay!";
+    }
+
+    public String noSucchUser(){
+        return "Sorry! User with such credentials not found.";
+    }
 }
