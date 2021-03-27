@@ -70,6 +70,7 @@ public class Income {
                 + ID + ';'
                 + name + ';'
                 + value + ';'
-                + incomeDate;
+                + incomeDate + ';'
+                + owner.getEmail();
     }
 }

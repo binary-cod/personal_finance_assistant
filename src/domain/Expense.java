@@ -70,7 +70,8 @@ public class Expense {
                 +getID()+";"
                 +getExpenseName()+";"
                 +getExpenseValue()+";"
-                +getExpenseDate();
+                +getExpenseDate() + ";"
+                +owner.getEmail();
     }
 
 }
