@@ -1,6 +1,7 @@
 package services;
 
 import domain.Income;
+import domain.User;
 import repo.FileRepo;
 
 import java.time.LocalDateTime;
@@ -26,8 +27,11 @@ public class IncomeService {
         return true;
     }
 
-    public List<Income> getData() {
-        return incomesList;
+    public List<Income> getData(User user) {
+        return incomesList
+                .stream()
+                .filter(income -> income.getOwner().getEmail().equals(user.getEmail()))
+                .collect(Collectors.toList());
     }
 
     public int numberOfIncomes() {
