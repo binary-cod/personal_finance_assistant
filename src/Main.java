@@ -35,16 +35,6 @@ public class Main {
 
         User user = optionalUser.get();
 
-       /* Income temp1 = new Income("Salary", 2000, LocalDateTime.of(2021, 3, 7, 12, 20, 30));
-        Income temp2 = new Income("Freelancing", 1000, LocalDateTime.of(2021, 3, 10, 12, 20, 30));
-        Income temp3 = new Income("Trading", 500, LocalDateTime.of(2021, 1, 21, 12, 20, 30));
-        Expense tempExpense = new Expense("taxi bill", 100.0f, LocalDateTime.of(2021, 1, 21, 12, 20, 30));
-
-        incomeService.insert(temp1);
-        incomeService.insert(temp2);
-        incomeService.insert(temp3);
-        expenseService.insert(tempExpense);
-*/
         do {
             System.out.println(ui.mainMenu());
             int input = scanner.nextInt();
@@ -94,8 +84,8 @@ public class Main {
                     Float incomeSum = incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now(), user));
                     Float expenseSum = expenseService.calculateSum(expenseService.getExpensesOfGivenDate(LocalDateTime.now(), user));
                     System.out.println(incomeService.getIncomesOfGivenDate(LocalDateTime.now(), user));
-                    System.out.println(expenseService.filterListByDate(LocalDateTime.now()));
-                    incomeService.deleteIncomeGivenDaysOld(5l);
+                    System.out.println(expenseService.getExpensesOfGivenDate(LocalDateTime.now(),user));
+                    //incomeService.deleteIncomeGivenDaysOld(5l);
 
                     System.out.println("sum of your incomes for month: "+LocalDateTime.now().getMonth()+" : "
                             + incomeSum);

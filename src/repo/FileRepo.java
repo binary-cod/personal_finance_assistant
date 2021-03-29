@@ -27,7 +27,7 @@ public class FileRepo {
     UserService userService;
 
     public FileRepo(){
-        this.fileName = "/home/wild/projects/binarycod/fin_app_cl/per_fin_assistant.txt";
+        this.fileName = "per_fin_assistant.txt";
         userService = new UserService();
         readAndparseData();
 
