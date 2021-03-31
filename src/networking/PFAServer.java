@@ -53,7 +53,7 @@ public class PFAServer {
                         if (incomeValue == -1 || incomeName.equals("-1"))
                             break;
 
-                        Income income = new Income(incomeName, incomeValue, LocalDateTime.now());
+                        Income income = new Income(incomeName, incomeValue, LocalDateTime.now(), null);
 
                         if (incomeService.insert(income))
                             writeToWriterAndFlush("Your income recorded as "+incomeService.numberOfIncomes(), out);
@@ -67,17 +67,17 @@ public class PFAServer {
                         if (expenseValue == -1 || expenseName.equals("-1"))
                             break;
 
-                        Expense expense =  new Expense(expenseName, expenseValue, LocalDateTime.now());
+                        Expense expense =  new Expense(expenseName, expenseValue, LocalDateTime.now(), null);
 
                         if (expenseService.insert(expense))
                             writeToWriterAndFlush("Your expense recorded as "+expenseService.numberOfExpense(), out);
 
                         break;
                     case 5:
-                        Float incomeSum = incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now()));
-                        Float expenseSum = expenseService.calculateSum(expenseService.getExpensesOfGivenDate(LocalDateTime.now()));
+                        Float incomeSum = incomeService.calculateSum(incomeService.getIncomesOfGivenDate(LocalDateTime.now(), null));
+                        Float expenseSum = expenseService.calculateSum(expenseService.getExpensesOfGivenDate(LocalDateTime.now(), null));
 
-                        writeToWriterAndFlush(incomeService.getIncomesOfGivenDate(LocalDateTime.now()).toString(), out);
+                        writeToWriterAndFlush(incomeService.getIncomesOfGivenDate(LocalDateTime.now(), null).toString(), out);
                         writeToWriterAndFlush(expenseService.filterListByDate(LocalDateTime.now()).toString(), out);
 
                         writeToWriterAndFlush("sum of your incomes for month: "+LocalDateTime.now().getMonth()+" : "
