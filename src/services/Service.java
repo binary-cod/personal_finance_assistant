@@ -1,8 +1,10 @@
 package services;
 
-import java.util.ArrayList;
+import domain.User;
+
+import java.util.List;
 
 public interface Service<T> {
     public Boolean insert(T value);
-    public ArrayList<T> getData();
+    public List<T> getData(User u);
 }

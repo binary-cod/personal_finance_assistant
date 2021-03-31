@@ -1,6 +1,8 @@
 package services;
 
 import domain.Income;
+import domain.User;
+import repo.FileRepo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,14 +13,25 @@ import java.util.stream.Collectors;
 
 public class IncomeService {
 
-    private List<Income> incomesList = new ArrayList<>();
+    private List<Income> incomesList;
+    private FileRepo fileRepo;
 
-    public Boolean insert(Income value) {
-        return incomesList.add(value);
+    public IncomeService() {
+        fileRepo = new FileRepo();
+        incomesList = fileRepo.getIncomeList();
     }
 
-    public List<Income> getData() {
-        return incomesList;
+    public Boolean insert(Income value) {
+        incomesList.add(value);
+        fileRepo.writeData(value.toString()+"\n");
+        return true;
+    }
+
+    public List<Income> getData(User user) {
+        return incomesList
+                .stream()
+                .filter(income -> income.getOwner().getEmail().equals(user.getEmail()))
+                .collect(Collectors.toList());
     }
 
     public int numberOfIncomes() {
@@ -37,10 +50,11 @@ public class IncomeService {
         return sum;
     }
 
-    public ArrayList<Income> getIncomesOfGivenDate(LocalDateTime someDate) {
+    public ArrayList<Income> getIncomesOfGivenDate(LocalDateTime someDate, User user) {
         ArrayList<Income> filteredList = new ArrayList<>();
         for (Income income : incomesList) {
-            if (income.getIncomeDate().getMonth().equals(someDate.getMonth())) {
+            if (income.getIncomeDate().getMonth().equals(someDate.getMonth())
+            && income.getOwner().getEmail().equals(user.getEmail())) {
                 filteredList.add(income);
             }
         }

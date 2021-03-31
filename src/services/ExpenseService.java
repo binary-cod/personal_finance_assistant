@@ -1,29 +1,36 @@
 package services;
 
 import domain.Expense;
-import domain.Income;
+import domain.User;
+import repo.FileRepo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public class ExpenseService implements Service<Expense> {
 
-    private ArrayList<Expense> expensesList = new ArrayList<>();
+    private List<Expense> expensesList;
+    private FileRepo fileRepo;
 
-    public Boolean insert(Expense value) {
-        return expensesList.add(value);
+    public ExpenseService(){
+        fileRepo = new FileRepo();
+        expensesList = fileRepo.getExpenseList();
     }
 
-    public ArrayList<Expense> getData() {
-        return expensesList;
+    public Boolean insert(Expense value) {
+        expensesList.add(value);
+        fileRepo.writeData(value.toString() +"\n");
+        return true;
+    }
+
+    public List<Expense> getData(User user) {
+        return expensesList
+                .stream()
+                .filter(expense -> expense.getOwner().getEmail().equals(user.getEmail()))
+                .collect(Collectors.toList());
     }
 
     public int numberOfExpense() {
@@ -58,10 +65,11 @@ public class ExpenseService implements Service<Expense> {
         return filteredList;
     }
 
-    public ArrayList<Expense> getExpensesOfGivenDate(LocalDateTime givenDate) {
+    public ArrayList<Expense> getExpensesOfGivenDate(LocalDateTime givenDate, User user) {
         ArrayList<Expense> resultList = new ArrayList<>();
         for (int i = 0; i < expensesList.size(); i++) {
-            if (expensesList.get(i).getExpenseDate().getMonth().equals(givenDate.getMonth()))
+            if (expensesList.get(i).getExpenseDate().getMonth().equals(givenDate.getMonth())
+            && expensesList.get(i).getOwner().getEmail().equals(user.getEmail()))
                 resultList.add(expensesList.get(i));
         }
         return resultList;
