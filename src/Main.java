@@ -92,7 +92,9 @@ public class Main {
                     System.out.println("sum of expenses for month: "+LocalDateTime.now().getMonth()+ " : "
                             + expenseSum);
                     System.out.println("Your balance is : "+ (incomeSum - expenseSum));
-                    System.out.println("----Data from File ---");
+                    System.out.println("----Data from DB ---");
+
+                    System.out.println("count is " + incomeService.count());
                 default:
                     System.out.println("please use numbers between 1 and 4");
                     break;

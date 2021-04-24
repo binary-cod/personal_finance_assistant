@@ -2,6 +2,7 @@ package services;
 
 import domain.Income;
 import domain.User;
+import repo.DBRepo;
 import repo.FileRepo;
 
 import java.time.LocalDateTime;
@@ -15,10 +16,18 @@ public class IncomeService {
 
     private List<Income> incomesList;
     private FileRepo fileRepo;
+    private DBRepo dbRepo;
 
     public IncomeService() {
         fileRepo = new FileRepo();
-        incomesList = fileRepo.getIncomeList();
+        dbRepo = new DBRepo();
+
+        incomesList = dbRepo.getIncomeList();
+    }
+
+    public Integer count(){
+
+        return dbRepo.selectCount();
     }
 
     public Boolean insert(Income value) {
